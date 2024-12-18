@@ -1,15 +1,46 @@
 import logo from './logo.svg';
 import './App.css';
 import Header from "./components/Header";
-import About from "./components/About";
-import Skills from "./components/Skills";
-import Projects from "./components/Projects";
+import AboutPage from "./routes/AboutPage";
+import SkillsPage from "./routes/SkillsPage";
+import ProjectsPage from "./routes/ProjectsPage";
 import Profile from "./components/Profile";
-import Experiences from "./components/Experiences";
+import ExperiencesPage from "./routes/ExperiencesPage";
 import React, {useEffect, useState} from "react";
 import axios from "axios";
-import skills from "./components/Skills";
+import skills from "./routes/SkillsPage";
+import {createBrowserRouter, Route, Router, Routes} from "react-router-dom";
+import LoginPage from "./routes/LoginPage";
+import HomePage from "./routes/HomePage";
+import RegisterPage from "./routes/RegisterPage";
 
+
+const router= createBrowserRouter([
+    {
+        path: "/",
+        element: <HomePage/>
+    },
+    {
+        path: "/login",
+        element: <LoginPage/>
+    },
+    {
+        path: "/register",
+        element: <RegisterPage/>
+    },
+    {
+        path: "/about",
+        element: <AboutPage/>
+    },
+    {
+        path: "/projects",
+        element: <ProjectsPage/>
+    },
+    {
+        path: "/experiences",
+        element: <ExperiencesPage/>
+    }
+])
 
 function App() {
     let id = 1// TODO
@@ -18,44 +49,52 @@ function App() {
     const [loading, setLoading] = useState(true);
 
 
-    useEffect(()=>{
+    useEffect(() => {
         const fetchUser = async () => {
             try {
-                const res=await axios.get(`http://localhost:8080/users/${id}`)
+                const res = await axios.get(`http://localhost:8080/users/${id}`)
                 setUser(res.data);
 
-            }catch (error) {
+            } catch (error) {
                 setError(error.message);
-            }finally{
+            } finally {
                 setLoading(false);
             }
         }
         fetchUser()
-    },[])
-    if (loading)return <p>Loading...</p>;
-    if (error) return <p>{error.message}</p>;
+    }, [])
+    if (loading) return <div className="flex flex-col relative text-center md:text-left md:flex-row max-w-7xl px-10 justify-evenly mx-auto items-center h-screen">
+        <h4 className="text-4xl font-semibold">
+           Loading...
+        </h4>
 
-  return (
-  <>
+    </div>
+    if (error) return <div className="flex flex-col relative text-center md:text-left md:flex-row max-w-7xl px-10 justify-evenly mx-auto items-center h-screen">
+        <h4 className="text-4xl font-semibold">
+            Something went wrong.
+        </h4>
 
-    <Header />
-      <div>{user.username}</div>
-    <Profile profile={user.profile} username={user.username} />
-    <section id="about" className="text-red-400">
-         <About profile={user.profile} />
-    </section>
-    <section id="skills">
-        <Skills skills={user.skills} />
-    </section>
-   <section id="projects">
-     <Projects projects={user.projects} />
-   </section>
-    <section>
-      <Experiences experiences={user.experiences} />
-    </section>
+    </div>
 
-  </>
-  );
+    return (
+        <>
+
+            <Header/>
+            <Profile profile={user.profile} username={user.username}/>
+            <section id="about" className="text-red-400">
+                <AboutPage profile={user.profile}/>
+            </section>
+            <section id="skills">
+                <SkillsPage skills={user.skills}/>
+            </section>
+            <section id="projects">
+                <ProjectsPage projects={user.projects}/>
+            </section>
+            <section>
+                <ExperiencesPage experiences={user.experiences}/>
+            </section>
+        </>
+    );
 }
 
 export default App;

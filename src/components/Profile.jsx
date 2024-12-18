@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import {Link} from "react-router-dom";
 
 
 const Profile = props => {
@@ -14,33 +15,33 @@ const Profile = props => {
 
             <div className="z-20">
                 <h2 className="text-sm uppercase text-gray-500 pb-2 tracking-[15px]">
-                    {props.profile.profession}
+                    {props.user.profile.profession}
                 </h2>
-                <h1 className="text-5xl lg:text-6xl font-semibold px-10">
-                    {props.username}
+                <h1 className="text-5xl lg:text-6xl font-semibold px-10 uppercase">
+                    {props.user.username}
                 </h1>
 
                 <div className="pt-5 flex items-start justify-between max-w-8xl mx-auto z-20 xl:items-center">
-                    <a href="#about">
+                    <Link to={`/about/${props.user.id}`}>
                         <button className="profileButton cursor-pointer hover:border-[#F7AB0A]/40 hover: text-[#F7AB0A]/40">
                             About
                         </button>
-                    </a>
-                    <a href="#expriences" >
+                    </Link>
+                    <Link to="/expriences" >
                         <button className="profileButton hover:border-[#F7AB0A]/40 hover: text-[#F7AB0A]/40">
                             experiences
                         </button>
-                    </a>
-                    <a href="#skills">
+                    </Link>
+                    <Link to="/skills">
                         <button className="profileButton hover:border-[#F7AB0A]/40 hover: text-[#F7AB0A]/40">
                             skills
                         </button>
-                    </a>
-                    <a href="#projects">
+                    </Link>
+                    <Link to="/projects">
                         <button className="profileButton hover:border-[#F7AB0A]/40 hover: text-[#F7AB0A]/40">
                             projects
                         </button>
-                    </a>
+                    </Link>
                 </div>
             </div>
         </div>

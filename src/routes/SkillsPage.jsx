@@ -1,10 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {motion} from 'framer-motion'
-import skill from "./Skill";
-import Skill from "./Skill";
+import skill from "../components/Skill";
+import Skill from "../components/Skill";
 
-const Skills = props => {
+const SkillsPage = props => {
     return (
         <>
 
@@ -32,7 +32,7 @@ const Skills = props => {
     )
 }
 
-Skills.propTypes = {
+SkillsPage.propTypes = {
     skills: PropTypes.array,
 }
-export default Skills
+export default SkillsPage

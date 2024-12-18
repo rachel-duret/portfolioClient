@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {motion} from 'framer-motion'
 
-const Experiences = props => {
+const ExperiencesPage = props => {
     return (
         <motion.div
             initial={{opacity: 0}}
@@ -60,5 +60,5 @@ const Experiences = props => {
         </motion.div>
     )
 }
-Experiences.propTypes = {}
-export default Experiences
+ExperiencesPage.propTypes = {}
+export default ExperiencesPage

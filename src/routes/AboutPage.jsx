@@ -1,9 +1,29 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import PropTypes from 'prop-types'
 import {motion} from 'framer-motion'
+import {useParams} from "react-router-dom";
+import axios from "axios";
 
-const About = props=> {
+const AboutPage = ()=> {
+    const id = useParams().id;
+    const [user, setUser] = useState([]);
+
+
+    useEffect(() => {
+        const fetchUser = async () => {
+            try {
+                const res = await axios.get(`http://localhost:8080/users/${id}`)
+                setUser(res.data);
+
+            } catch (error) {
+
+            }
+        }
+        fetchUser()
+    }, [id])
     return (
+
+
         <motion.div
             initial={{opacity: 0}}
             whileInView={{opacity: 1}}
@@ -35,12 +55,12 @@ const About = props=> {
                     Here is a <span className="uppercase"> little</span> background about
                     me
                 </h4>
-                <p className="text-base">
-                    {props.profile.aboutMe}
+                <p className="text-base capitalize">
+                    {user.profile.aboutMe}
                 </p>
             </div>
         </motion.div>
     )
 }
-About.propTypes = {}
-export default About
+AboutPage.propTypes = {}
+export default AboutPage
