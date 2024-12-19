@@ -1,8 +1,30 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import PropTypes from 'prop-types'
 import {motion} from 'framer-motion'
+import {useParams} from "react-router";
+import axios from "axios";
 
 const ProjectsPage = props => {
+    let params = useParams();
+    const [user, setUser] = useState([]);
+    const [projects, setProjects] = useState([]);
+
+
+    useEffect(() => {
+        console.log(params)
+        const fetchUser = async () => {
+            try {
+
+                const res = await axios.get(`http://localhost:8080/users/${params.id}`)
+                setUser(res.data);
+                setProjects(res.data.projects);
+
+            } catch (error) {
+
+            }
+        }
+        fetchUser()
+    }, [params.id])
     return (
         <motion.div
             initial={{opacity: 0}}
@@ -13,9 +35,9 @@ const ProjectsPage = props => {
                 Projects
             </h3>
 
-            {/* Projects */}
+
             <div className="relative w-full flex overflow-scroll overflow-y-hidden snap-x snap-mandatory z-20">
-                {props.projects.map((project, i) => (
+                {projects.map((project, i) => (
                     <div className="w-screen flex-shrink-0 snap-center flex flex-col space-y-5 items-center justify-center p-20 md:p-44 h-screen ">
                         <a href={project.url} target="_blank" rel="noopener noreferrer">
                         <motion.img
@@ -32,7 +54,7 @@ const ProjectsPage = props => {
                         <div className="space-y-10 px-0 md:px-10 max-w-6xl">
                             <h4 className="text-4xl font-semibold text-center">
 								<span className="underline decoration-[#F7AB0A]/50 ">
-									Case Study {i + 1} of {props.projects.length}:
+									Case Study {i + 1} of {projects.length}:
 								</span>
                                 {project.name}
                             </h4>

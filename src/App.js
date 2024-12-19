@@ -15,33 +15,6 @@ import HomePage from "./routes/HomePage";
 import RegisterPage from "./routes/RegisterPage";
 
 
-const router= createBrowserRouter([
-    {
-        path: "/",
-        element: <HomePage/>
-    },
-    {
-        path: "/login",
-        element: <LoginPage/>
-    },
-    {
-        path: "/register",
-        element: <RegisterPage/>
-    },
-    {
-        path: "/about",
-        element: <AboutPage/>
-    },
-    {
-        path: "/projects",
-        element: <ProjectsPage/>
-    },
-    {
-        path: "/experiences",
-        element: <ExperiencesPage/>
-    }
-])
-
 function App() {
     let id = 1// TODO
     const [user, setUser] = useState([]);
@@ -78,9 +51,18 @@ function App() {
 
     return (
         <>
-
             <Header/>
-            <Profile profile={user.profile} username={user.username}/>
+            <Profile user={user}/>
+            <Router>
+                <Routes>
+                    <Route path="/" element={<HomePage/>}/>
+                    <Route path="/about/:id" element={<AboutPage/>}/>
+
+                </Routes>
+
+            </Router>
+
+
             <section id="about" className="text-red-400">
                 <AboutPage profile={user.profile}/>
             </section>

@@ -27,17 +27,17 @@ const Profile = props => {
                             About
                         </button>
                     </Link>
-                    <Link to="/expriences" >
+                    <Link to={`/experiences/${props.user.id}`} >
                         <button className="profileButton hover:border-[#F7AB0A]/40 hover: text-[#F7AB0A]/40">
                             experiences
                         </button>
                     </Link>
-                    <Link to="/skills">
+                    <Link to={`/skills/${props.user.id}`} >
                         <button className="profileButton hover:border-[#F7AB0A]/40 hover: text-[#F7AB0A]/40">
                             skills
                         </button>
                     </Link>
-                    <Link to="/projects">
+                    <Link to={`/projects/${props.user.id}`} >
                         <button className="profileButton hover:border-[#F7AB0A]/40 hover: text-[#F7AB0A]/40">
                             projects
                         </button>

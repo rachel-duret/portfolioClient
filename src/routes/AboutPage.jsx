@@ -1,26 +1,30 @@
 import React, {useEffect, useState} from 'react'
 import PropTypes from 'prop-types'
 import {motion} from 'framer-motion'
-import {useParams} from "react-router-dom";
+import {useParams} from "react-router";
 import axios from "axios";
 
 const AboutPage = ()=> {
-    const id = useParams().id;
+    let params = useParams();
     const [user, setUser] = useState([]);
+    const [profile, setProfile] = useState({});
 
 
     useEffect(() => {
+        console.log(params)
         const fetchUser = async () => {
             try {
-                const res = await axios.get(`http://localhost:8080/users/${id}`)
+
+                const res = await axios.get(`http://localhost:8080/users/${params.id}`)
                 setUser(res.data);
+                setProfile(res.data.profile);
 
             } catch (error) {
 
             }
         }
         fetchUser()
-    }, [id])
+    }, [params.id])
     return (
 
 
@@ -46,7 +50,7 @@ const AboutPage = ()=> {
                     x: 0,
                 }}
                 viewport={{once: true}}
-                src="https://pbs.twimg.com/profile_images/1314165969791614977/S_ntW8X4_400x400.jpg"
+                src={profile.imageUrl}
                 className="mb-20 md:mb-0 flex-shrink-0 w-56 h-56 rounded-full object-cover md:rounded-lg md:w-64 md:h-95"
             />
 
@@ -56,7 +60,8 @@ const AboutPage = ()=> {
                     me
                 </h4>
                 <p className="text-base capitalize">
-                    {user.profile.aboutMe}
+
+                    {profile.aboutMe}
                 </p>
             </div>
         </motion.div>
