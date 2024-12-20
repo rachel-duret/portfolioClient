@@ -42,8 +42,14 @@ const SkillsPage = props => {
 
         }
         console.log(newSkill)
-        await axios.post(`http://localhost:8080/skills/skill`, newSkill)
-        window.location.reload()
+        await axios.post(`http://localhost:8080/skills/skill`, newSkill,{
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyYWNoZWwiLCJpYXQiOjE3MzQ2NDE4MjMsImV4cCI6MTczNDk0MTgyM30._FHrqc32650NZAkjG9bTif2e7PAvvtImGlC8fsNfnf0"
+            }
+        })
+
 
     }
     return (
@@ -96,7 +102,6 @@ const SkillsPage = props => {
                         aria-describedby="user_avatar_help"
                         id="image"
                         type="file"
-                        value={image}
                         onChange={(event) => setImage(event.target.files[0])}
 
                         className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"/>

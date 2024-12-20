@@ -12,46 +12,27 @@ import AboutPage from "./routes/AboutPage";
 import ProjectsPage from "./routes/ProjectsPage";
 import ExperiencesPage from "./routes/ExperiencesPage";
 import SkillsPage from "./routes/SkillsPage";
+import AuthProvider from "react-auth-kit";
+import createStore from "react-auth-kit/createStore";
 
 
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
-const router= createBrowserRouter([
-    {
-        path: "/",
-        element: <HomePage/>
-    },
-    {
-        path: "/login",
-        element: <LoginPage/>
-    },
-    {
-        path: "/register",
-        element: <RegisterPage/>
-    },
-    {
-        path: "/about/:id",
-        element: <AboutPage/>
-    },
-    {
-        path: "/skills/:id",
-        element: <SkillsPage/>
-    },
-    {
-        path: "/projects/:id",
-        element: <ProjectsPage/>
-    },
-    {
-        path: "/experiences/:id",
-        element: <ExperiencesPage/>
-    }
-])
+const store= createStore({
+    authName:"_auth",
+    authType:"cookie",
+    cookieDomain:window.location.hostname,
+    cookieSecure:false// TODO should set to trie in production
+});
 
 root.render(
   <React.StrictMode>
-      <RouterProvider router={router} />
+      <AuthProvider store={store} >
+          <App/>
+      </AuthProvider>
+
   </React.StrictMode>
 );
 

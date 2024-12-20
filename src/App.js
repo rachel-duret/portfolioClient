@@ -9,10 +9,11 @@ import ExperiencesPage from "./routes/ExperiencesPage";
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 import skills from "./routes/SkillsPage";
-import {createBrowserRouter, Route, Router, Routes} from "react-router-dom";
+import {BrowserRouter, createBrowserRouter, Route, Router, Routes} from "react-router-dom";
 import LoginPage from "./routes/LoginPage";
 import HomePage from "./routes/HomePage";
 import RegisterPage from "./routes/RegisterPage";
+import RequireAuth from "@auth-kit/react-router/RequireAuth";
 
 
 function App() {
@@ -51,30 +52,20 @@ function App() {
 
     return (
         <>
-            <Header/>
-            <Profile user={user}/>
-            <Router>
+            <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<HomePage/>}/>
                     <Route path="/about/:id" element={<AboutPage/>}/>
+                    <Route path="/skills/:id" element={<SkillsPage/>}/>
+                    <Route path="/experiences/:id" element={<ExperiencesPage/>}/>
+                    <Route path="/projects/:id" element={<ProjectsPage/>}/>
+
+                    <Route path="/login" element={<LoginPage />} />
+                    <Route path="/register" element={<RegisterPage />} />
 
                 </Routes>
 
-            </Router>
-
-
-            <section id="about" className="text-red-400">
-                <AboutPage profile={user.profile}/>
-            </section>
-            <section id="skills">
-                <SkillsPage skills={user.skills}/>
-            </section>
-            <section id="projects">
-                <ProjectsPage projects={user.projects}/>
-            </section>
-            <section>
-                <ExperiencesPage experiences={user.experiences}/>
-            </section>
+            </BrowserRouter>
         </>
     );
 }

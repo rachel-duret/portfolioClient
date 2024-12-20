@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react'
 import PropTypes from 'prop-types'
 import Header from "../components/Header";
 import Profile from "../components/Profile";
+
 import axios from "axios";
 
 const HomePage = props => {
