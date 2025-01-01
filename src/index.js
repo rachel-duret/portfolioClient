@@ -21,10 +21,12 @@ import createStore from "react-auth-kit/createStore";
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 const store= createStore({
+    debug: true,
     authName:"_auth",
     authType:"cookie",
     cookieDomain:window.location.hostname,
-    cookieSecure:false// TODO should set to trie in production
+    // cookieSecure:false// TODO should set to trie in production
+    cookieSecure: window.location.protocol==="http:",
 });
 
 root.render(

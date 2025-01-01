@@ -19,16 +19,26 @@ const LoginPage = props => {
         try{
             const response = await axios.post(`http://localhost:8080/auth/login`, login);
           console.log(response.data)
-            signIn({
+          console.log(username)
+
+            const success=signIn({
                auth:{
                    token: response.data,
                },
-                expires: 1735002114,
-                authState:{username:login.username}
+                exp: 1735002114,
+                userState:{
+                    username: username,
+                }
             })
-            navigate("/")
+            if (success){
+                navigate("/")
+            }else {
+                alert('Authentication failed');
+            }
+
 
         }catch(error){
+            alert('Invalid credentials');
           console.log(error)
         }
 
