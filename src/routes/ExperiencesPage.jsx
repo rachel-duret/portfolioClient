@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react'
-import PropTypes from 'prop-types'
 import {motion} from 'framer-motion'
 import {useParams} from "react-router";
 import axios from "axios";

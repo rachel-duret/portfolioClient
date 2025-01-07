@@ -4,14 +4,6 @@ import './index.css';
 import './output.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {createBrowserRouter, RouterProvider} from "react-router-dom";
-import HomePage from "./routes/HomePage";
-import LoginPage from "./routes/LoginPage";
-import RegisterPage from "./routes/RegisterPage";
-import AboutPage from "./routes/AboutPage";
-import ProjectsPage from "./routes/ProjectsPage";
-import ExperiencesPage from "./routes/ExperiencesPage";
-import SkillsPage from "./routes/SkillsPage";
 import AuthProvider from "react-auth-kit";
 import createStore from "react-auth-kit/createStore";
 

@@ -33,7 +33,7 @@ const SkillsPage = props => {
             }
         }
         fetchUser()
-    }, [params.id])
+    }, [auth, params.id])
 
 
     return (

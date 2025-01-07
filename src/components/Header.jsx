@@ -1,8 +1,5 @@
 import React, {useEffect} from 'react'
 import {useState} from "react";
-import PropTypes from 'prop-types'
-import {SocialIcon} from "react-social-icons";
-import {motion} from 'framer-motion'
 import axios from "axios";
 
 

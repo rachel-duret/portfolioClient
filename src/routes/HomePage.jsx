@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react'
-import PropTypes from 'prop-types'
 import Header from "../components/Header";
 import Profile from "../components/Profile";
 
@@ -25,7 +24,7 @@ const HomePage = props => {
             }
         }
         fetchUser()
-    }, [])
+    }, [id])
     if (loading) return <div className="flex flex-col relative text-center md:text-left md:flex-row max-w-7xl px-10 justify-evenly mx-auto items-center h-screen">
         <h4 className="text-4xl font-semibold">
             Loading...

@@ -1,19 +1,15 @@
-import logo from './logo.svg';
+
 import './App.css';
-import Header from "./components/Header";
 import AboutPage from "./routes/AboutPage";
 import SkillsPage from "./routes/SkillsPage";
 import ProjectsPage from "./routes/ProjectsPage";
-import Profile from "./components/Profile";
 import ExperiencesPage from "./routes/ExperiencesPage";
 import React, {useEffect, useState} from "react";
 import axios from "axios";
-import skills from "./routes/SkillsPage";
 import {BrowserRouter, createBrowserRouter, Route, Router, Routes} from "react-router-dom";
 import LoginPage from "./routes/LoginPage";
 import HomePage from "./routes/HomePage";
 import RegisterPage from "./routes/RegisterPage";
-import RequireAuth from "@auth-kit/react-router/RequireAuth";
 
 
 function App() {

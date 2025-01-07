@@ -1,6 +1,4 @@
 import React, {useContext, useEffect, useRef, useState} from 'react'
-import PropTypes from 'prop-types'
-import {loginCall} from "../apiCalls";
 import axios from "axios";
 import useSignIn from "react-auth-kit/hooks/useSignIn";
 import {useNavigate} from "react-router-dom";
