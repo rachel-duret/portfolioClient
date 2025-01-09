@@ -12,7 +12,6 @@ const SkillsPage = props => {
     const [user, setUser] = useState([]);
     const [skills, setSkills] = useState([]);
     const [authUser, setAuthUser] = useState(null);
-
     const auth = useAuthUser()
 
 
@@ -29,7 +28,7 @@ const SkillsPage = props => {
                 }
 
             } catch (error) {
-
+                // TODO
             }
         }
         fetchUser()
