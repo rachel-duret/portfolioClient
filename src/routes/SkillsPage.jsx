@@ -53,7 +53,7 @@ const SkillsPage = props => {
                 </h3>
                 <div className="grid grid-cols-4 gap-5">
                     {skills.map((skill) => (
-                        <Skill skill={skill}/>
+                        <Skill skill={skill} username={user.username} authUser={authUser}/>
                     ))
                     }
                 </div>

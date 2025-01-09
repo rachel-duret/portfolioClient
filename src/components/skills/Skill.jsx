@@ -1,10 +1,13 @@
-
-import { motion } from 'framer-motion';
+import {motion} from 'framer-motion';
 import * as PropTypes from "prop-types";
+import useAuthUser from "react-auth-kit/hooks/useAuthUser";
+import {useState} from "react";
+import axios from "axios";
+import Delete from "./DeleteSkill";
+import DeleteSkill from "./DeleteSkill";
 
 
-
-const Skill=props=> {
+const Skill = props => {
     return (
         <div className="group relative flex cursor-pointer ">
             <motion.img
@@ -14,16 +17,24 @@ const Skill=props=> {
                 src={props.skill.image}
                 alt=""
             />
-            <div className="absolute opacity-0 group-hover:opacity-80 transition duration-300 ease-in-out group-hover:bg-white h-24 w-24  xl:w-32 xl:h-32 rounded-full z-0">
+            <div
+                className="absolute opacity-0 group-hover:opacity-80 transition duration-300 ease-in-out group-hover:bg-white h-24 w-24  xl:w-32 xl:h-32 rounded-full z-0">
                 <div className="flex items-center justify-center h-full">
                     <p className="text-2xl font-boldtext-black opacity-80">{props.skill.name}</p>
                 </div>
+
             </div>
+            {
+                props.authUser === props.username && (
+                    <DeleteSkill skill={props.skill} userId = {props.skill.userId} />
+                )
+
+            }
         </div>
     );
 }
-Skill.prototype ={
-    skill:PropTypes.object
+Skill.prototype = {
+    skill: PropTypes.object
 }
 
 export default Skill

@@ -4,11 +4,14 @@ import useAuthHeader from "react-auth-kit/hooks/useAuthHeader";
 import {ref, uploadBytes, getDownloadURL} from "firebase/storage";
 import {storage} from "../../firebase/config";
 
+
 const NewSkill = props => {
+
     const [skillName, setSkillName] = useState('');
     const [url, setUrl] = useState('');
     const [file, setFile] = useState('');
     const authHeader = useAuthHeader();
+
 
     const handleAddSkill = async (event) => {
         event.preventDefault()
@@ -37,6 +40,7 @@ const NewSkill = props => {
                             "Authorization": authHeader
                         }
                     })
+                    props.history.push(`/skills/${props.userId}`)
 
                 } catch (error) {
                     // TODO
