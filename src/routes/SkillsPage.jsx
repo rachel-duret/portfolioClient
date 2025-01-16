@@ -51,7 +51,8 @@ const SkillsPage = props => {
                     Hover over a skill for currency profieciency
                 </h3>
                 <div className="grid grid-cols-4 gap-5">
-                    {skills.map((skill) => (
+                    {
+                        skills.map((skill) => (
                         <Skill skill={skill} username={user.username} authUser={authUser}/>
                     ))
                     }
