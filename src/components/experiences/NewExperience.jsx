@@ -17,12 +17,12 @@ const NewExperience = props => {
     const [company, setCompany]= useState('')
     const [skills, setSkills]= useState([])
     const [selectSkills, setSeclectSkills] = useState(null)
+    const [summaries, setSummaries] = useState([{summary:""}])
     const [selectOptions, setSelectOptions] = useState([])
     const [startedAt, setStartedAt] = useState(new Date())
     const [endedAt, setEndedAt] = useState(new Date())
     // const selectRef = useRef();
     const authHeader = useAuthHeader();
-
     // Select for skills
     const options=[]
         props.user.skills.map((skill)=> options.push({value: skill.name, label: skill.name.toUpperCase()}))
@@ -44,6 +44,10 @@ const NewExperience = props => {
         }, 2000)
     }
 
+    const handleAddSummaryInput=()=>{
+            setSummaries([...summaries,{summary: ""}])
+    }
+
     // new Experience
     const handleAddExperience = async (event) => {
         event.preventDefault()
@@ -55,7 +59,8 @@ const NewExperience = props => {
             description: description,
             technologies:selectSkills,
             startedAt: startedAt,
-            endedAt: endedAt
+            endedAt: endedAt,
+            summaries:summaries
 
         }
         // upload file to firebase storage
@@ -126,8 +131,6 @@ const NewExperience = props => {
                         required
                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
                 </div>
-
-
                 <div className="mb-5">
                     <label htmlFor="description"
                            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
@@ -149,6 +152,24 @@ const NewExperience = props => {
                     isMulti={true}
                     onChange={handleSelect}
                 />
+                {/*Summary*/}
+                <label htmlFor="summary">Summary</label>
+                {
+                    summaries.map((summary, index) => (
+                        <div className="mb-5" key={index}>
+                            <div className="">
+                                <input className="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-base focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" name="summary" type="text" id="summary"/>
+                                {/* eslint-disable-next-line no-mixed-operators */}
+                                {summaries.length - 1 ===index&& summaries.length < 4 && (
+                                    <button className="text-gray-900 bg-gradient-to-r from-teal-200" onClick={handleAddSummaryInput}>Add summary </button>
+                                )}
+                            </div>
+                            {/*TODO remove a summary*/}
+
+                        </div>
+                    ))
+                }
+
 
                 <div className="mb-5">
                     <label htmlFor="started"
