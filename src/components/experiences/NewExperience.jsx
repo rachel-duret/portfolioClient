@@ -17,7 +17,7 @@ const NewExperience = props => {
     const [company, setCompany]= useState('')
     const [skills, setSkills]= useState([])
     const [selectSkills, setSeclectSkills] = useState(null)
-    const [summaries, setSummaries] = useState([{summary:""}])
+    const [summaries, setSummaries] = useState([{value:""}])
     const [selectOptions, setSelectOptions] = useState([])
     const [startedAt, setStartedAt] = useState(new Date())
     const [endedAt, setEndedAt] = useState(new Date())
@@ -26,7 +26,6 @@ const NewExperience = props => {
     // Select for skills
     const options=[]
         props.user.skills.map((skill)=> options.push({value: skill.name, label: skill.name.toUpperCase()}))
-    // console.log(options)
     const handleSelect=(selectOptions)=>{
         setSelectOptions(selectOptions)
         console.log(selectOptions)
@@ -45,7 +44,20 @@ const NewExperience = props => {
     }
 
     const handleAddSummaryInput=()=>{
-            setSummaries([...summaries,{summary: ""}])
+            setSummaries([...summaries,{value: ""}])
+    }
+    const handleRemoveSummaryInput=(index)=>{
+        const list = [...summaries];
+        list.splice(index, 1);
+        setSummaries(list)
+    }
+    const handleSummaryChange=(e, indext)=>{
+        const {name, value} = e.target;
+        const list = [...summaries];
+        list[indext][name] = value;
+        setSummaries(list)
+        console.log(summaries)
+
     }
 
     // new Experience
@@ -158,13 +170,25 @@ const NewExperience = props => {
                     summaries.map((summary, index) => (
                         <div className="mb-5" key={index}>
                             <div className="">
-                                <input className="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-base focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" name="summary" type="text" id="summary"/>
+                                <input value={summary.value}
+                                       name="value"
+                                       type="text"
+                                       id="summary"
+                                    onChange={(e)=>handleSummaryChange(e, index)}
+                                    className="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-base focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
                                 {/* eslint-disable-next-line no-mixed-operators */}
                                 {summaries.length - 1 ===index&& summaries.length < 4 && (
                                     <button className="text-gray-900 bg-gradient-to-r from-teal-200" onClick={handleAddSummaryInput}>Add summary </button>
                                 )}
                             </div>
                             {/*TODO remove a summary*/}
+                            <div className="">
+                                {summaries.length !==1 && (
+                                    <button type="button" onClick={()=>handleRemoveSummaryInput(index)}>
+                                        Remove
+                                    </button>
+                                )}
+                            </div>
 
                         </div>
                     ))
@@ -177,7 +201,6 @@ const NewExperience = props => {
                     <DatePicker
                         selected={startedAt}
                         onChange={(date) => setStartedAt(date)}
-                        showTimeSelect
                         dateFormat="yyyy-mm-dd"
                         id="started"/>
                     <label htmlFor="ended"
@@ -186,6 +209,7 @@ const NewExperience = props => {
                         selected={endedAt} onChange={(date) => setEndedAt(date)}
                         id="ended"
                         dateFormat="yyyy-mm-dd"
+                        className="border border-red-500"
                     />
                 </div>
 

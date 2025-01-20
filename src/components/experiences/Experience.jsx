@@ -4,6 +4,7 @@ import DeleteExprience from "./DeleteExprience";
 
 
 const Experience = props => {
+    console.log(props.exprience.summaries)
     return (
         <article
             className="flex flex-col rounded-lg items-center space-y-7 flex-shrink-0 w-[500px] md:w-[600px] xl:w-[900px] snap-center bg-[#292929] p-10 hover:opacity-100 opacity-40 cursor-pointer transition-opacity duration-200 overflow-hidden ">
@@ -41,13 +42,12 @@ const Experience = props => {
                 }
                 <p className=" py-5 ">Started work:{props.exprience.startedAt}</p>
                 <p className=" py-5 ">Ended work:{props.exprience.endedAt}</p>
-
                 <ul className="list-disc space-y-4 ml-5 text-lg">
-                    <li>Summary point</li>
-                    <li>Summary point</li>
-                    <li>Summary point</li>
-                    <li>Summary point</li>
-                    <li>Summary point</li>
+                    {props.exprience.summaries.map((summary)=>(
+                        <li>{summary.value}</li>
+                    ))
+                    }
+
                 </ul>
             </div>
             {
