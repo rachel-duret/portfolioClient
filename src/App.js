@@ -10,6 +10,7 @@ import {BrowserRouter, createBrowserRouter, Route, Router, Routes} from "react-r
 import LoginPage from "./routes/LoginPage";
 import HomePage from "./routes/HomePage";
 import RegisterPage from "./routes/RegisterPage";
+import Header from "./components/Header";
 
 
 function App() {
@@ -48,7 +49,9 @@ function App() {
 
     return (
         <>
+
             <BrowserRouter>
+                <Header />
                 <Routes>
                     <Route path="/" element={<HomePage/>}/>
                     <Route path="/about/:id" element={<AboutPage/>}/>

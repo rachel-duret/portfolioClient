@@ -2,6 +2,8 @@ import React, {useEffect, useState} from 'react'
 import {motion} from 'framer-motion'
 import {useParams} from "react-router";
 import axios from "axios";
+import Profile from "../components/Profile";
+import {Link} from "react-router-dom";
 
 const AboutPage = ()=> {
     let params = useParams();
@@ -35,6 +37,7 @@ const AboutPage = ()=> {
             <h3 className="absolute top-24 uppercase tracking-[20px] text-gray-500 text-2xl">
                 About Me
             </h3>
+
 
             <motion.img
                 initial={{

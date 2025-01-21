@@ -40,7 +40,6 @@ const HomePage = props => {
     </div>
     return (
      <>
-         <Header/>
          {
              user.profile===null? <div>nothing to show </div> :  <Profile user={user} />
          }
