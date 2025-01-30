@@ -43,6 +43,7 @@ const NewExperience = props => {
         }, 2000)
     }
 
+// add summaries
     const handleAddSummaryInput=()=>{
             setSummaries([...summaries,{value: ""}])
     }
@@ -216,7 +217,7 @@ const NewExperience = props => {
                 <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white" htmlFor="image">Upload
                     an Image for your project</label>
                 <input
-                    aria-describedby="user_avatar_help"
+                    aria-describedby="experience"
                     id="image"
                     type="file"
                     onChange={(event) => setFile(event.target.files[0])}

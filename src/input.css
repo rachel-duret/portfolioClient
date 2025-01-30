@@ -1,3 +1,6 @@
+@import "flowbite-datepicker";
+@import "flowbite";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

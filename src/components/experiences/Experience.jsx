@@ -4,10 +4,19 @@ import DeleteExprience from "./DeleteExprience";
 
 
 const Experience = props => {
-    console.log(props.exprience.summaries)
+    const formatDate = (timestamp) => {
+        const format = {
+            year: "numeric",
+            month: "numeric",
+            day: "numeric"
+        }
+        return new Date(timestamp).toLocaleDateString(undefined, format)
+    }
+    const startedAt = formatDate(props.exprience.startedAt);
+    const endedAt = formatDate(props.exprience.endedAt);
     return (
         <article
-            className="flex flex-col rounded-lg items-center space-y-7 flex-shrink-0 w-[500px] md:w-[600px] xl:w-[900px] snap-center bg-[#292929] p-10 hover:opacity-100 opacity-40 cursor-pointer transition-opacity duration-200 overflow-hidden ">
+            className="flex flex-col rounded-lg items-center space-y-7 flex-shrink-0 w-[300px] md:w-[500px] xl:w-[600px] snap-center bg-[#292929] p-10 hover:opacity-100 opacity-40 cursor-pointer transition-opacity duration-200 overflow-hidden ">
             <motion.img
                 initial={{
                     y: -100,
@@ -24,37 +33,37 @@ const Experience = props => {
             <div className="px-0 md:px-10">
                 <h4 className="text-4xl font-light">{props.exprience.name}</h4>
                 <h5 className="text-3xl text-gray-400">{props.exprience.company}</h5>
-                <p className="font-bold text-2xl mt-1">{props.exprience.description
-                }</p>
+                <p className=" py-3 ">{startedAt} to {endedAt}</p>
+                <p className="font-bold text-2xl mt-1">{props.exprience.description}</p>
 
-                {
-                    props.exprience.technologies.map((technologie)=> (
-                        <div className="flex space-x-2 my-2">
+                <div className="flex flex-row flex-wrap space-x-2 my-2">
+                    {
+                        props.exprience.technologies.map((technology) => (
+
                             <img
                                 className="h-10 w-10 rounded-full"
-                                src={technologie.image}
-                                alt=""
+                                src={technology.image}
+                                alt="technologie"
                             />
-                        </div>
-
-                    ))
-
-                }
-                <p className=" py-5 ">Started work:{props.exprience.startedAt}</p>
-                <p className=" py-5 ">Ended work:{props.exprience.endedAt}</p>
-                <ul className="list-disc space-y-4 ml-5 text-lg">
-                    {props.exprience.summaries.map((summary)=>(
-                        <li>{summary.value}</li>
-                    ))
+                        ))
                     }
+                </div>
+                <div className="px-4">
+                    <ul className=" list-disc text-left space-x-3 ">
+                        {props.exprience.summaries.map((summary) => (
+                            <li>{summary.value}</li>
+                        ))
+                        }
 
-                </ul>
+                    </ul>
+                </div>
+
+
             </div>
             {
                 props.authUser === props.username && (
-                    <DeleteExprience experience={props.exprience} userId = {props.exprience.userId} />
+                    <DeleteExprience experience={props.exprience} userId={props.exprience.userId}/>
                 )
-
             }
         </article>
     )

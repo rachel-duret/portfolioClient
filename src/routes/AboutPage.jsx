@@ -4,31 +4,37 @@ import {useParams} from "react-router";
 import axios from "axios";
 import Profile from "../components/Profile";
 import {Link} from "react-router-dom";
+import useAuthUser from "react-auth-kit/hooks/useAuthUser";
+import UpdateProfile from "../components/profile/UpdateProfile";
 
 const AboutPage = ()=> {
     let params = useParams();
     const [user, setUser] = useState([]);
     const [profile, setProfile] = useState({});
+    const [authUser, setAuthUser] = useState(null);
+    const auth = useAuthUser()
 
 
     useEffect(() => {
-        console.log(params)
         const fetchUser = async () => {
             try {
 
                 const res = await axios.get(`http://localhost:8080/users/${params.id}`)
                 setUser(res.data);
                 setProfile(res.data.profile);
+                if (auth){
+                    setAuthUser(auth.username)
+                }
 
             } catch (error) {
-
+                // TODO
             }
         }
         fetchUser()
     }, [params.id])
     return (
 
-
+<>
         <motion.div
             initial={{opacity: 0}}
             whileInView={{opacity: 1}}
@@ -67,6 +73,11 @@ const AboutPage = ()=> {
                 </p>
             </div>
         </motion.div>
+    {
+        authUser===user.username &&
+        <UpdateProfile user={user} />
+    }
+        </>
     )
 }
 AboutPage.propTypes = {}
