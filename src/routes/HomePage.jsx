@@ -3,6 +3,7 @@ import Header from "../components/Header";
 import Profile from "../components/Profile";
 
 import axios from "axios";
+import AboutPage from "./AboutPage";
 
 const HomePage = props => {
     let id = 1// TODO
@@ -41,7 +42,7 @@ const HomePage = props => {
     return (
      <>
          {
-             user.profile===null? <div>nothing to show </div> :  <Profile user={user} />
+             user.profile===null? <div>nothing to show </div> :  <AboutPage user={user} />
          }
 
      </>
