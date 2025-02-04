@@ -4,9 +4,10 @@ import useAuthHeader from "react-auth-kit/hooks/useAuthHeader";
 import {ref, uploadBytes, getDownloadURL} from "firebase/storage";
 import {storage} from "../../firebase/config";
 import SubmitButton from "../buttons/SubmitButton";
+import CancelButton from "../buttons/CancelButton";
 
 
-const NewSkill = props => {
+const NewSkill = ({user, setOpen}) => {
 
     const [skillName, setSkillName] = useState('');
     const [url, setUrl] = useState('');
@@ -17,7 +18,7 @@ const NewSkill = props => {
     const handleAddSkill = async (event) => {
         event.preventDefault()
         const newSkill = {
-            userId: props.userId,
+            userId: user.id,
             name: skillName,
             url: url,
 
@@ -41,7 +42,7 @@ const NewSkill = props => {
                             "Authorization": authHeader
                         }
                     })
-                    props.history.push(`/skills/${props.userId}`)
+                    user.history.push(`/skills/${user.id}`)
 
                 } catch (error) {
                     // TODO
@@ -54,8 +55,8 @@ const NewSkill = props => {
 
     }
     return (
-        <div className="w-full flex space-x-5 overflow-scroll p-10 snap-x snap-madatory bg-[#F7AB0A]/10">
-            <form className="max-w-lg mx-auto" onSubmit={handleAddSkill}>
+        <div className="relative flex justify-center p-4 w-full  max-h-full">
+            <form className="p-4 md:p-5" onSubmit={handleAddSkill}>
                 <div className="mb-5">
                     <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Skill
                         name</label>
@@ -76,20 +77,22 @@ const NewSkill = props => {
                         value={url}
                         onChange={(event) => setUrl(event.target.value)}
                         required
-                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
+                        className="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-base focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
                 </div>
-                <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white" htmlFor="image">Upload
-                    an Image for your skill</label>
-                <input
-                    aria-describedby="user_avatar_help"
-                    id="image"
-                    type="file"
-                    onChange={(event) => setFile(event.target.files[0])}
-
-                    className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"/>
-
-                {/*<button type="submit" className="text-gray-900 bg-gradient-to-r from-teal-200 ">Submit</button>*/}
-                <SubmitButton />
+                <div className="mb-5">
+                    <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white" htmlFor="image">
+                        Upload an Image for your skill
+                    </label>
+                    <input
+                        aria-describedby="user_avatar_help"
+                        id="image"
+                        type="file"
+                        onChange={(event) => setFile(event.target.files[0])}/>
+                </div>
+                <div className="mb-5 flex justify-end">
+                    <SubmitButton/>
+                    <CancelButton setOpen={setOpen}/>
+                </div>
             </form>
         </div>
     )

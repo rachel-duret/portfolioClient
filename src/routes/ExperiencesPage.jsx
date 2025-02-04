@@ -5,11 +5,13 @@ import axios from "axios";
 import useAuthUser from "react-auth-kit/hooks/useAuthUser";
 import Experience from "../components/experiences/Experience";
 import NewExperience from "../components/experiences/NewExperience";
+import AddButton from "../components/buttons/AddButton";
 
 const ExperiencesPage = props => {
     let params = useParams();
     const [user, setUser] = useState([]);
     const [experiences, setExperiences] = useState([]);
+    const [open, setOpen] = useState(false)
     const [authUser, setAuthUser] = useState(null);
     const auth = useAuthUser()
 
@@ -31,6 +33,9 @@ const ExperiencesPage = props => {
         }
         fetchUser()
     }, [auth, params.id])
+    if (open){
+        return <NewExperience user={user} setOpen={setOpen} />
+    }
     return (
         <>
             <div className="flex flex-col  text-center justify-center">
@@ -48,11 +53,15 @@ const ExperiencesPage = props => {
                     }
 
                 </div>
+
+                <div className="mt-10">
+                    {
+                        authUser === user.username &&
+                        <AddButton setOpen={setOpen} name="Experience"/>
+
+                    }
+                </div>
             </div>
-            {
-                authUser === user.username &&
-                <NewExperience user={user}/>
-            }
         </>
     )
 }

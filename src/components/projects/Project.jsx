@@ -2,35 +2,40 @@ import React from 'react'
 import {motion} from "framer-motion";
 import DeleteSkill from "../skills/DeleteSkill";
 import DeleteProject from "./DeleteProject";
+import {Link} from "react-router-dom";
+import EditIcon from "../buttons/icons/EditIcon";
 
 const Project = props => {
     return (
         <div
-            className="w-screen flex-shrink-0 snap-center flex flex-col space-y-5 items-center justify-center p-20 md:p-44 h-screen ">
-            <a href={props.project.url} target="_blank" rel="noopener noreferrer">
-                <motion.img
-                    initial={{
-                        y: -300,
-                        opacity: 0,
-                    }}
-                    transition={{duration: 1.2}}
-                    whileInView={{opacity: 1, y: 0}}
-                    viewport={{once: true}}
+            className="flex flex-col rounded-lg items-center space-y-7 flex-shrink-0 w-[500px] md:w-[500px] xl:w-[600px] snap-center bg-[#292929] p-10 hover:opacity-100 opacity-40 cursor-pointer transition-opacity duration-200 overflow-hidden ">
+            <Link to={props.project.url} target="_blank" rel="noopener noreferrer">
+                <img
                     src={props.project.image}
-                    alt=""
+                    alt={props.project.name}
+                    className="w-32 h-32 rounded-full xl:w-[200px] xl:h-[200px] object-cover object-center "
                 />
-                <div className="space-y-10 px-0 md:px-10 max-w-6xl">
-                    <h4 className="text-4xl font-semibold text-center">
-                        {props.project.name}
-                    </h4>
-                </div>
-            </a>
-            {
-                props.authUser === props.username && (
-                    <DeleteProject project={props.project} userId = {props.project.userId} />
-                )
+                <h4 className="text-4xl font-semibold text-center uppercase">
+                    {props.project.name}
+                </h4>
 
-            }
+            </Link>
+            <div className="flex justify-between mt-4 md:mt-6">
+                {
+                    props.authUser === props.username && (
+                        <DeleteProject project={props.project} userId={props.project.userId}/>
+                    )
+
+                }
+                {/*TODO to implement update project compnent*/}
+                <div className="flex  justify-center">
+                    <button className="text-red-400 border-gray-500 ">
+                        <EditIcon/>
+                    </button>
+                </div>
+            </div>
+
+
         </div>
     )
 }

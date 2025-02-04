@@ -18,7 +18,7 @@ const AboutPage = ({user}) => {
         authUser=auth.username
     }
     if (open){
-        return <UpdateProfile user={user}/>
+        return <UpdateProfile user={user} setOpen={setOpen}/>
     }
 
     return (

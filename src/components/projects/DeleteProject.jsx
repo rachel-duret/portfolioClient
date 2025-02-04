@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import useAuthHeader from "react-auth-kit/hooks/useAuthHeader";
 import {deleteObject, getStorage, ref} from "firebase/storage";
 import axios from "axios";
+import DeleteIcon from "../buttons/icons/DeleteIcon";
 
 const DeleteProject = props => {
     const authHeader = useAuthHeader();
@@ -32,7 +33,8 @@ const DeleteProject = props => {
 
     return (
         <div className="flex  justify-center">
-            <button className="text-red-400 border-gray-500 " onClick={() => deleteOneProject(props.project.id)}>Delete
+            <button className="text-red-400 border-gray-500 " onClick={() => deleteOneProject(props.project.id)}>
+                <DeleteIcon/>
             </button>
         </div>
     )

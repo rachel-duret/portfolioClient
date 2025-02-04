@@ -30,14 +30,7 @@ function Header(){
 
     return (
         <header className="sticky top-0 p-5 flex items-start justify-between max-w-8xl mx-auto z-20 xl:items-center border-slate-500 bg-slate-500">
-            {/*{*/}
-            {/*    user.socials.map((social)=>(*/}
-            {/*            <div className="text-center">*/}
-            {/*                <Link to={social.url}>{social.name}</Link>*/}
-            {/*            </div>*/}
-            {/*        )*/}
-            {/*    )*/}
-            {/*}*/}
+
             <div className="text-center profileButton cursor-pointer hover:border-[#F7AB0A]/40 hover: text-[#F7AB0A]/40">
                 <Link to="/">Home</Link>
             </div>
