@@ -22,7 +22,7 @@ const ProjectsPage = props => {
         const fetchUser = async () => {
             try {
 
-                const res = await axios.get(`http://localhost:8080/users/${params.id}`)
+                const res = await axios.get(`http://localhost:8080/users/user/${params.username}`)
                 setUser(res.data);
                 setProjects(res.data.projects);
                 if (auth) {

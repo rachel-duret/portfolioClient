@@ -31,20 +31,20 @@ function Header(){
     return (
         <header className="sticky top-0 p-5 flex items-start justify-between max-w-8xl mx-auto z-20 xl:items-center border-slate-500 bg-slate-500">
 
+            {/*<div className="text-center profileButton cursor-pointer hover:border-[#F7AB0A]/40 hover: text-[#F7AB0A]/40">*/}
+            {/*    <Link to={`/about/${user.username}`}>Home</Link>*/}
+            {/*</div>*/}
             <div className="text-center profileButton cursor-pointer hover:border-[#F7AB0A]/40 hover: text-[#F7AB0A]/40">
-                <Link to="/">Home</Link>
+                <Link to={`/about/${user.username}`}>about{user.username}</Link>
             </div>
             <div className="text-center profileButton cursor-pointer hover:border-[#F7AB0A]/40 hover: text-[#F7AB0A]/40">
-                <Link to={`/about/${user.id}`}>about{user.username}</Link>
+                <Link to={`/skills/${user.username}`}>Skills</Link>
             </div>
             <div className="text-center profileButton cursor-pointer hover:border-[#F7AB0A]/40 hover: text-[#F7AB0A]/40">
-                <Link to={`/skills/${user.id}`}>Skills</Link>
+                <Link to={`/experiences/${user.username}`}>Experiences</Link>
             </div>
             <div className="text-center profileButton cursor-pointer hover:border-[#F7AB0A]/40 hover: text-[#F7AB0A]/40">
-                <Link to={`/experiences/${user.id}`}>Experiences</Link>
-            </div>
-            <div className="text-center profileButton cursor-pointer hover:border-[#F7AB0A]/40 hover: text-[#F7AB0A]/40">
-                <Link to={`/projects/${user.id}`}>projects</Link>
+                <Link to={`/projects/${user.username}`}>projects</Link>
             </div>
 
         </header>

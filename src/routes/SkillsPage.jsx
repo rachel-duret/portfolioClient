@@ -1,12 +1,10 @@
 import React, {useEffect, useState} from 'react'
 import PropTypes from 'prop-types'
-import {motion} from 'framer-motion'
 import Skill from "../components/skills/Skill";
 import {useParams} from "react-router";
 import axios from "axios";
 import useAuthUser from "react-auth-kit/hooks/useAuthUser";
 import NewSkill from "../components/skills/NewSkill";
-import UpdateButton from "../components/buttons/UpdateButton";
 import AddButton from "../components/buttons/AddButton";
 
 const SkillsPage = props => {
@@ -23,7 +21,7 @@ const SkillsPage = props => {
         const fetchUser = async () => {
             try {
 
-                const res = await axios.get(`http://localhost:8080/users/${params.id}`)
+                const res = await axios.get(`http://localhost:8080/users/user/${params.username}`)
                 setUser(res.data);
                 setSkills(res.data.skills);
                 if (auth) {
@@ -35,7 +33,7 @@ const SkillsPage = props => {
             }
         }
         fetchUser()
-    }, [auth, params.id])
+    }, [auth, params.username])
 
     if (open) {
         return <NewSkill user={user} setOpen={setOpen}/>

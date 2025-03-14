@@ -10,6 +10,9 @@ import CancelButton from "../buttons/CancelButton";
 import {motion} from "framer-motion";
 import AddIcon from "../buttons/icons/AddIcon";
 import DeleteIcon from "../buttons/icons/DeleteIcon";
+import Hobby from "./Hobby";
+import hobby from "./Hobby";
+import CloseIcon from "../buttons/icons/CloseIcon";
 
 const UpdateProfile = ({user, setOpen}) => {
     const [file, setFile] = useState("")
@@ -44,6 +47,7 @@ const UpdateProfile = ({user, setOpen}) => {
         const {name, value} = e.target;
         const list = [...hobbies];
         list[indext][name] = value;
+        console.log(list)
         setHobbies(list)
         console.log(hobbies)
 
@@ -71,6 +75,7 @@ const UpdateProfile = ({user, setOpen}) => {
                 await uploadBytes(imageRef, file).then(snapshot => {
                     getDownloadURL(snapshot.ref).then(downloadURL => {
                         updateProfile.imageUrl = downloadURL;
+                        console.log(downloadURL)
                         axios.put(`http://localhost:8080/users/${user.id}/profile`, updateProfile, {
                             headers: {
                                 "Content-Type": "application/json",
@@ -103,6 +108,23 @@ const UpdateProfile = ({user, setOpen}) => {
         }
 
     }
+    const handleDeleteOneHobby = async (hobby) => {
+        try {
+            await axios.delete(`http://localhost:8080/hobbies/${hobby.id}`, {
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json",
+                    "Authorization": authHeader
+                }
+            })
+            const desertRef = ref(storage, hobby.imageUrl)
+            if (await getDownloadURL(desertRef)) {
+                await deleteObject(desertRef)
+            }
+        } catch (error) {
+            return <div>Delete Hobby with error</div>
+        }
+    }
 
     return (
         <div className="relative flex justify-center p-4 w-full  max-h-full">
@@ -119,7 +141,7 @@ const UpdateProfile = ({user, setOpen}) => {
                             id="profession"
                             value={profession}
                             onChange={event => setProfession(event.target.value)}
-                            className="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-base focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            className="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-base focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         />
                     </div>
                     <div className="mb-5">
@@ -132,7 +154,7 @@ const UpdateProfile = ({user, setOpen}) => {
                             id="phone"
                             value={phoneNumber}
                             onChange={event => setPhonenumber(event.target.value)}
-                            className="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-base focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            className="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-base focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         />
                     </div>
 
@@ -146,7 +168,7 @@ const UpdateProfile = ({user, setOpen}) => {
                             id="birth"
                             value={birth}
                             onChange={event => setbirth(event.target.value)}
-                            className="bg-green-50 border border-green-500 text-green-900 dark:text-green-400 placeholder-green-700 dark:placeholder-green-500 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-green-500"
+                            className="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-base focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         />
                     </div>
 
@@ -198,12 +220,30 @@ const UpdateProfile = ({user, setOpen}) => {
                             onChange={event => setFile(event.target.files[0])}
                         />
                     </div>
+                    <div className="mb-5 flex flex-row justify-between">
+                        {
+                            user.hobbies.map((hobby) => (
+                                <div className=" relative flex-col justify-center pt-3 pr-4 ">
+                                    <img
+                                        src={hobby.imageUrl}
+                                        className="mb-20 md:mb-0 flex-shrink-0 w-10 h-10 rounded-full object-cover md:rounded-lg md:w-50 md:h-50"
+                                        alt={hobby.name}/>
+
+                                    <button className="absolute top-0  right-0 text-red-400 border-gray-500 "
+                                            onClick={() => handleDeleteOneHobby(hobby)}>
+                                        <CloseIcon/>
+                                    </button>
+                                </div>
+                            ))
+                        }
+                    </div>
 
                     {/* Hobbies*/}
                     {
                         hobbies.map((hobby, index) => (
                             <div className="mb-5" key={index}>
-                                <div className="grid gap-4 mb-4 grid-cols-3">
+
+                                <div className="grid gap-4 mb-4 grid-cols-3 content-center">
                                     <div className="col-span-3 sm:col-span-1">
                                         <label
                                             htmlFor="name"
@@ -213,6 +253,7 @@ const UpdateProfile = ({user, setOpen}) => {
                                                name="name"
                                                type="text"
                                                id="name"
+                                               required={true}
                                                onChange={(e) => handleHobbyChange(e, index)}
                                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                         />
@@ -225,17 +266,17 @@ const UpdateProfile = ({user, setOpen}) => {
                                         <input
                                             value={hobby.imageUrl}
                                             name="imageUrl"
-                                            type="text"
+                                            type="file"
                                             id="imageUrl"
                                             onChange={(e) => handleHobbyChange(e, index)}
-                                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                            // className=" text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
 
                                         />
                                     </div>
 
 
                                     {/* eslint-disable-next-line no-mixed-operators */}
-                                    <div className="col-span-3 sm:col-span-1">
+                                    <div className="col-span-3 sm:col-span-1  flex justify-center pt-2">
                                         {hobbies.length !== 0 && (
                                             <button type="button" onClick={() => handleRemoveHobbyInput(index)}>
                                                 <DeleteIcon/>
@@ -253,7 +294,7 @@ const UpdateProfile = ({user, setOpen}) => {
                             </div>
                         ))
                     }
-                    <div className="mb-5 flex justify-end">
+                    <div className="mt-5 pt-5 flex justify-end">
                         <SubmitButton/>
                         <CancelButton setOpen={setOpen}/>
                     </div>

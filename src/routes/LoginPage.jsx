@@ -29,7 +29,7 @@ const LoginPage = props => {
                 }
             })
             if (success){
-                navigate("/")
+                navigate(`/about/${username}`)
             }else {
                 alert('Authentication failed');
             }

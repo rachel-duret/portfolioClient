@@ -1,24 +1,26 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import DeleteIcon from "../buttons/icons/DeleteIcon";
 
 const Hobby =( {hobbies}) => {
     return (
       <>
-          <div className="flex flex-row justify-evenly">
+          <div className="flex flex-row justify-between flex-wrap">
               {
                   hobbies.map((hobby) => (
-                      <div>
-                          <h4 className="text-2sxl text-center font-semibold uppercase">
+                      <div className="space-x-10">
+                          <h6 className="text-sm text-center font-semibold uppercase">
                               {hobby.name}
-                          </h4>
+                          </h6>
                           <img
                               src={hobby.imageUrl}
-                              className="mb-20 md:mb-0 flex-shrink-0 w-30 h-30 rounded-full object-cover md:rounded-lg md:w-50 md:h-50"
+                              className="mb-20 md:mb-0 flex-shrink-0 w-10 h-10 rounded-full object-cover md:rounded-lg md:w-50 md:h-50"
                            alt={hobby.name}/>
                       </div>
-                  ))
 
+                  ))
               }
+
           </div>
       </>
     )

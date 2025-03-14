@@ -2,21 +2,42 @@ import React, {useEffect, useState} from 'react'
 import {motion} from 'framer-motion'
 import {useParams} from "react-router";
 import axios from "axios";
-import Profile from "../components/Profile";
-import {Link} from "react-router-dom";
 import useAuthUser from "react-auth-kit/hooks/useAuthUser";
 import UpdateProfile from "../components/profile/UpdateProfile";
 import Hobby from "../components/profile/Hobby";
 import UpdateButton from "../components/buttons/UpdateButton";
 
-const AboutPage = ({user}) => {
+const AboutPage = props => {
+    let params = useParams();
     const [open, setOpen] =useState(false)
-
+    const [user, setUser] = useState([]);
+    const [profile, setProfile]=useState({})
+    const [hobbies, setHobbies]= useState([]);
+    const [authUser, setAuthUser] = useState(null);
     const auth = useAuthUser()
-    let authUser = null;
-    if (auth){
-        authUser=auth.username
-    }
+
+    useEffect(() => {
+
+        const fetchUser = async () => {
+            try {
+                const res = await axios.get(`http://localhost:8080/users/user/${params.username}`)
+
+                setUser(res.data);
+                console.log(user)
+                setProfile(res.data.profile)
+                setHobbies(res.data.hobbies)
+                if (auth) {
+                    setAuthUser(auth.username);
+                }
+
+            } catch (error) {
+                // TODO
+            }
+        }
+        fetchUser()
+    }, [auth, params.username])
+
+
     if (open){
         return <UpdateProfile user={user} setOpen={setOpen}/>
     }
@@ -44,20 +65,20 @@ const AboutPage = ({user}) => {
                                 x: 0,
                             }}
                             viewport={{once: true}}
-                            src={user.profile.imageUrl}
+                            src={profile.imageUrl}
                             className="mb-20 md:mb-0 flex-shrink-0 justify-center w-56 h-56 rounded-full object-cover md:rounded-lg md:w-64 md:h-95"
                         />
                     </div>
                     <div className=" space-y-10 px-10">
 
                         <h2 className="text-2xl uppercase text-gray-500 pb-2 tracking-[10px]">
-                            {user.profile.profession}
+                            {profile.profession}
                         </h2>
                         <p className="text-base capitalize">
 
-                            {user.profile.aboutMe}
+                            {profile.aboutMe}
                         </p>
-                        <Hobby hobbies={user.hobbies}/>
+                        <Hobby hobbies={hobbies}/>
                     </div>
 
                 </div>
@@ -68,7 +89,6 @@ const AboutPage = ({user}) => {
                     <UpdateButton setOpen={setOpen}/>
                 }
             </div>
-
         </>
     )
 }
