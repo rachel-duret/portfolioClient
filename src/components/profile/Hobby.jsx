@@ -1,6 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import DeleteIcon from "../buttons/icons/DeleteIcon";
 
 const Hobby =( {hobbies}) => {
     return (

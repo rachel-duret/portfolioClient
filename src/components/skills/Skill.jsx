@@ -1,11 +1,7 @@
 import {motion} from 'framer-motion';
 import * as PropTypes from "prop-types";
-import useAuthUser from "react-auth-kit/hooks/useAuthUser";
-import React, {useState} from "react";
-import axios from "axios";
-import Delete from "./DeleteSkill";
+import React from "react";
 import DeleteSkill from "./DeleteSkill";
-import DeleteIcon from "../buttons/icons/DeleteIcon";
 import EditIcon from "../buttons/icons/EditIcon";
 
 

@@ -4,13 +4,10 @@ import ProfilePage from "./pages/ProfilePage";
 import SkillsPage from "./pages/SkillsPage";
 import ProjectsPage from "./pages/ProjectsPage";
 import ExperiencesPage from "./pages/ExperiencesPage";
-import React, {useEffect, useState} from "react";
-import axios from "axios";
-import {BrowserRouter, createBrowserRouter, Route, Router, Routes} from "react-router-dom";
+import React from "react";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
-import HomePage from "./pages/HomePage";
 import RegisterPage from "./pages/RegisterPage";
-import Header from "./components/Header";
 import Footer from "./components/Footer";
 
 

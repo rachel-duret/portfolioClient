@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import useAuthHeader from "react-auth-kit/hooks/useAuthHeader";
 import {deleteObject, getStorage, ref} from "firebase/storage";
 import axios from "axios";

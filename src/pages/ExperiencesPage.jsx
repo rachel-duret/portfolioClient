@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react'
-import {motion} from 'framer-motion'
 import {useParams} from "react-router";
 import axios from "axios";
 import useAuthUser from "react-auth-kit/hooks/useAuthUser";

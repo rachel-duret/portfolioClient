@@ -1,11 +1,9 @@
 import React, {useEffect, useState} from 'react'
-import {motion} from 'framer-motion'
 import {useParams} from "react-router";
 import axios from "axios";
 import Project from "../components/projects/Project";
 import useAuthUser from "react-auth-kit/hooks/useAuthUser";
 import NewProject from "../components/projects/NewProject";
-import NewSkill from "../components/skills/NewSkill";
 import AddButton from "../components/buttons/AddButton";
 import Header from "../components/Header";
 

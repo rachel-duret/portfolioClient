@@ -1,17 +1,12 @@
 import React, {useState} from 'react'
-import PropTypes from 'prop-types'
-import Select from "react-select/base";
 import {deleteObject, getDownloadURL, ref, uploadBytes} from "firebase/storage";
 import {storage} from "../../firebase/config";
 import axios from "axios";
 import useAuthHeader from "react-auth-kit/hooks/useAuthHeader";
 import SubmitButton from "../buttons/SubmitButton";
 import CancelButton from "../buttons/CancelButton";
-import {motion} from "framer-motion";
 import AddIcon from "../buttons/icons/AddIcon";
 import DeleteIcon from "../buttons/icons/DeleteIcon";
-import Hobby from "./Hobby";
-import hobby from "./Hobby";
 import CloseIcon from "../buttons/icons/CloseIcon";
 
 const UpdateProfile = ({user, setOpen}) => {
