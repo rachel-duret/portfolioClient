@@ -5,7 +5,7 @@ export const loginCall = async (userCredential, dispatch) => {
     dispatch({type: 'LOGIN_START'});
 
     try{
-        const response = await axios.post(`https://portfolio-dev-v1-332485539213.herokuapp.com/auth/login`, userCredential);
+        const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/auth/login`, userCredential);
         dispatch({type: 'LOGIN_SUCCESS', payload: response.data});
 
     }catch(error){

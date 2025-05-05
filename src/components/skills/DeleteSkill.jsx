@@ -15,7 +15,7 @@ const DeleteSkill = props => {
         // const fileRef = storage.ref().refFromURL(props.image)
 
         try {
-            await axios.delete(`https://portfolio-dev-v1-332485539213.herokuapp.com/skills/${id}`, {
+            await axios.delete(`${process.env.REACT_APP_BASE_URL}/skills/${id}`, {
                 headers: {
                     "Content-Type": "application/json",
                     "Accept": "application/json",

@@ -26,7 +26,7 @@ const RegisterPage = props => {
         }
 
         try {
-           const response= await axios.post(`https://portfolio-dev-v1-332485539213.herokuapp.com/auth/register`, newUser)
+           const response= await axios.post(`${process.env.REACT_APP_BASE_URL}/auth/register`, newUser)
             const success=signIn({
                 auth:{
                     token: response.data,

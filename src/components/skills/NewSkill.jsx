@@ -35,7 +35,7 @@ const NewSkill = ({user, setOpen}) => {
                 console.log(downloadURL)
                 try {
                     console.log(newSkill)
-                     axios.post(`https://portfolio-dev-v1-332485539213.herokuapp.com/skills/skill`, newSkill, {
+                     axios.post(`${process.env.REACT_APP_BASE_URL}/skills/skill`, newSkill, {
                         headers: {
                             "Content-Type": "application/json",
                             "Accept": "application/json",

@@ -23,7 +23,7 @@ const ProjectsPage = props => {
         const fetchUser = async () => {
             try {
 
-                const res = await axios.get(`https://portfolio-dev-v1-332485539213.herokuapp.com/users/user/${params.username}`)
+                const res = await axios.get(`${process.env.REACT_APP_BASE_URL}/users/user/${params.username}`)
                 setUser(res.data);
                 setProjects(res.data.projects);
                 if (auth) {

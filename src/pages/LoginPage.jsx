@@ -16,7 +16,7 @@ const LoginPage = props => {
             password: password
         }
         try {
-            const response = await axios.post(`https://portfolio-dev-v1-332485539213.herokuapp.com/auth/login`, login);
+            const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/auth/login`, login);
             console.log(response.data)
             console.log(username)
 

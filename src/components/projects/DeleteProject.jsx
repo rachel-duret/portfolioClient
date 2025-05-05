@@ -15,7 +15,7 @@ const DeleteProject = props => {
         const  desertRef = ref(storage, props.project.image)
         await deleteObject(desertRef)
         try {
-            await axios.delete(`https://portfolio-dev-v1-332485539213.herokuapp.com/projects/${id}`, {
+            await axios.delete(`${process.env.REACT_APP_BASE_URL}/projects/${id}`, {
                 headers: {
                     "Content-Type": "application/json",
                     "Accept": "application/json",

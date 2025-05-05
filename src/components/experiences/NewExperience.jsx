@@ -90,7 +90,7 @@ const NewExperience = ({user, setOpen}) => {
                 console.log(newExperience)
                 try {
                     console.log(newExperience)
-                    axios.post(`https://portfolio-dev-v1-332485539213.herokuapp.com/experiences/experience`, newExperience, {
+                    axios.post(`${process.env.REACT_APP_BASE_URL}/experiences/experience`, newExperience, {
                         headers: {
                             "Content-Type": "application/json",
                             "Accept": "application/json",

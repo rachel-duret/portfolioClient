@@ -76,7 +76,7 @@ const UpdateProfile = ({user, setOpen}) => {
                     getDownloadURL(snapshot.ref).then(downloadURL => {
                         updateProfile.imageUrl = downloadURL;
                         console.log(downloadURL)
-                        axios.put(`https://portfolio-dev-v1-332485539213.herokuapp.com/users/${user.id}/profile`, updateProfile, {
+                        axios.put(`${process.env.REACT_APP_BASE_URL}/users/${user.id}/profile`, updateProfile, {
                             headers: {
                                 "Content-Type": "application/json",
                                 "Accept": "application/json",
@@ -93,7 +93,7 @@ const UpdateProfile = ({user, setOpen}) => {
             }
 
 
-            await axios.put(`https://portfolio-dev-v1-332485539213.herokuapp.com/users/${user.id}/profile`, updateProfile, {
+            await axios.put(`${process.env.REACT_APP_BASE_URL}/users/${user.id}/profile`, updateProfile, {
                 headers: {
                     "Content-Type": "application/json",
                     "Accept": "application/json",
@@ -110,7 +110,7 @@ const UpdateProfile = ({user, setOpen}) => {
     }
     const handleDeleteOneHobby = async (hobby) => {
         try {
-            await axios.delete(`https://portfolio-dev-v1-332485539213.herokuapp.com/hobbies/${hobby.id}`, {
+            await axios.delete(`${process.env.REACT_APP_BASE_URL}/hobbies/${hobby.id}`, {
                 headers: {
                     "Content-Type": "application/json",
                     "Accept": "application/json",

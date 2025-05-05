@@ -11,7 +11,7 @@ const DeleteExprience = props => {
     const deleteOneExperience = async (id) => {
 
         try {
-            await axios.delete(`https://portfolio-dev-v1-332485539213.herokuapp.com/experiences/${id}`, {
+            await axios.delete(`${process.env.REACT_APP_BASE_URL}/experiences/${id}`, {
                 headers: {
                     "Content-Type": "application/json",
                     "Accept": "application/json",
