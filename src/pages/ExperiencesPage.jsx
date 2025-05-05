@@ -6,6 +6,7 @@ import useAuthUser from "react-auth-kit/hooks/useAuthUser";
 import Experience from "../components/experiences/Experience";
 import NewExperience from "../components/experiences/NewExperience";
 import AddButton from "../components/buttons/AddButton";
+import Header from "../components/Header";
 
 const ExperiencesPage = props => {
     let params = useParams();
@@ -21,7 +22,7 @@ const ExperiencesPage = props => {
         const fetchUser = async () => {
             try {
 
-                const res = await axios.get(`http://localhost:8080/users/user/${params.username}`)
+                const res = await axios.get(`https://portfolio-dev-v1-332485539213.herokuapp.com/users/user/${params.username}`)
                 setUser(res.data);
                 setExperiences(res.data.experiences);
                 if (auth) {
@@ -38,6 +39,7 @@ const ExperiencesPage = props => {
     }
     return (
         <>
+            <Header />
             <div className="flex flex-col  text-center justify-center">
               <div className="my-5">
                   <h3 className="uppercase tracking-[20px] text-gray-500 text-2xl">

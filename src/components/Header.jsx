@@ -2,10 +2,11 @@ import React, {useEffect} from 'react'
 import {useState} from "react";
 import axios from "axios";
 import {Link} from "react-router-dom";
+import {useParams} from "react-router";
 
 
 function Header(){
-    let id = 1// TODO
+    let params = useParams();
     const [user, setUser] = useState([]);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -13,7 +14,8 @@ function Header(){
     useEffect(()=>{
     const fetchUser = async () => {
     try {
-      const res=await axios.get(`http://localhost:8080/users/${id}`)
+        console.log(params.username)
+        const res = await axios.get(`https://portfolio-dev-v1-332485539213.herokuapp.com/users/user/${params.username}`)
             setUser(res.data);
 
 

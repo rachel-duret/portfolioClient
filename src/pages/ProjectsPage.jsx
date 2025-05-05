@@ -7,6 +7,7 @@ import useAuthUser from "react-auth-kit/hooks/useAuthUser";
 import NewProject from "../components/projects/NewProject";
 import NewSkill from "../components/skills/NewSkill";
 import AddButton from "../components/buttons/AddButton";
+import Header from "../components/Header";
 
 const ProjectsPage = props => {
     let params = useParams();
@@ -22,7 +23,7 @@ const ProjectsPage = props => {
         const fetchUser = async () => {
             try {
 
-                const res = await axios.get(`http://localhost:8080/users/user/${params.username}`)
+                const res = await axios.get(`https://portfolio-dev-v1-332485539213.herokuapp.com/users/user/${params.username}`)
                 setUser(res.data);
                 setProjects(res.data.projects);
                 if (auth) {
@@ -41,6 +42,7 @@ const ProjectsPage = props => {
     }
     return (
         <>
+            <Header />
             <div
                 className="flex flex-col  text-center justify-center ">
                 <div className="my-5">
@@ -55,7 +57,6 @@ const ProjectsPage = props => {
                     ))}
                 </div>
 
-                {/*<div className="w-full absolute top-[30%] bg-[#F7AB0A]/10 left-0 h-[500px] -skew-y-12 "/>*/}
                 <div className="mt-10">
                     {
                         authUser === user.username &&

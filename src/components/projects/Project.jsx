@@ -1,6 +1,4 @@
 import React from 'react'
-import {motion} from "framer-motion";
-import DeleteSkill from "../skills/DeleteSkill";
 import DeleteProject from "./DeleteProject";
 import {Link} from "react-router-dom";
 import EditIcon from "../buttons/icons/EditIcon";
@@ -28,11 +26,16 @@ const Project = props => {
 
                 }
                 {/*TODO to implement update project compnent*/}
-                <div className="flex  justify-center">
-                    <button className="text-red-400 border-gray-500 ">
-                        <EditIcon/>
-                    </button>
-                </div>
+                {
+                    props.authUser === props.username && (
+                        <div className="flex  justify-center">
+                            <button className="text-red-400 border-gray-500 ">
+                                <EditIcon/>
+                            </button>
+                        </div>
+                    )
+                }
+
             </div>
 
 

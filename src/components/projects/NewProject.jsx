@@ -37,7 +37,7 @@ const NewProject = ({user, setOpen}) => {
                 console.log(downloadURL)
                 try {
                     console.log(newProject)
-                    axios.post(`http://localhost:8080/projects/project`, newProject, {
+                    axios.post(`https://portfolio-dev-v1-332485539213.herokuapp.com/projects/project`, newProject, {
                         headers: {
                             "Content-Type": "application/json",
                             "Accept": "application/json",

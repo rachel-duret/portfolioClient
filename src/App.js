@@ -1,15 +1,15 @@
 
 import './App.css';
-import AboutPage from "./routes/AboutPage";
-import SkillsPage from "./routes/SkillsPage";
-import ProjectsPage from "./routes/ProjectsPage";
-import ExperiencesPage from "./routes/ExperiencesPage";
+import ProfilePage from "./pages/ProfilePage";
+import SkillsPage from "./pages/SkillsPage";
+import ProjectsPage from "./pages/ProjectsPage";
+import ExperiencesPage from "./pages/ExperiencesPage";
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 import {BrowserRouter, createBrowserRouter, Route, Router, Routes} from "react-router-dom";
-import LoginPage from "./routes/LoginPage";
-import HomePage from "./routes/HomePage";
-import RegisterPage from "./routes/RegisterPage";
+import LoginPage from "./pages/LoginPage";
+import HomePage from "./pages/HomePage";
+import RegisterPage from "./pages/RegisterPage";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 
@@ -22,10 +22,9 @@ function App() {
             {/*<div className="w-full absolute top-[20%]  bg-purple-200 opacity-20 left-0 h-[500px] -skew-y-12 "/>*/}
 
             <BrowserRouter>
-                <Header />
                 <Routes>
                     {/*<Route path="/" element={<HomePage/>}/>*/}
-                    <Route path="/about/:username"  element={<AboutPage/>}/>
+                    <Route path="/about/:username"  element={<ProfilePage/>}/>
                     <Route path="/skills/:username" element={<SkillsPage/>}/>
                     <Route path="/experiences/:username" element={<ExperiencesPage/>}/>
                     <Route path="/projects/:username" element={<ProjectsPage/>}/>

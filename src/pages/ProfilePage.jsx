@@ -6,8 +6,9 @@ import useAuthUser from "react-auth-kit/hooks/useAuthUser";
 import UpdateProfile from "../components/profile/UpdateProfile";
 import Hobby from "../components/profile/Hobby";
 import UpdateButton from "../components/buttons/UpdateButton";
+import Header from "../components/Header";
 
-const AboutPage = props => {
+const ProfilePage = props => {
     let params = useParams();
     const [open, setOpen] =useState(false)
     const [user, setUser] = useState([]);
@@ -20,7 +21,7 @@ const AboutPage = props => {
 
         const fetchUser = async () => {
             try {
-                const res = await axios.get(`http://localhost:8080/users/user/${params.username}`)
+                const res = await axios.get(`https://portfolio-dev-v1-332485539213.herokuapp.com/users/user/${params.username}`)
 
                 setUser(res.data);
                 console.log(user)
@@ -69,18 +70,17 @@ const AboutPage = props => {
                             className="mb-20 md:mb-0 flex-shrink-0 justify-center w-56 h-56 rounded-full object-cover md:rounded-lg md:w-64 md:h-95"
                         />
                     </div>
-                    <div className=" space-y-10 px-10">
+                </div>
+                <div className=" space-y-10 px-10">
 
-                        <h2 className="text-2xl uppercase text-gray-500 pb-2 tracking-[10px]">
-                            {profile.profession}
-                        </h2>
-                        <p className="text-base capitalize">
+                    <h2 className="text-2xl uppercase text-gray-500 pb-2 tracking-[10px]">
+                        {profile.profession}
+                    </h2>
+                    <p className="text-base capitalize">
 
-                            {profile.aboutMe}
-                        </p>
-                        <Hobby hobbies={hobbies}/>
-                    </div>
-
+                        {profile.aboutMe}
+                    </p>
+                    <Hobby hobbies={hobbies}/>
                 </div>
 
 
@@ -89,8 +89,9 @@ const AboutPage = props => {
                     <UpdateButton setOpen={setOpen}/>
                 }
             </div>
+            <Header />
         </>
     )
 }
-AboutPage.propTypes = {}
-export default AboutPage
+ProfilePage.propTypes = {}
+export default ProfilePage

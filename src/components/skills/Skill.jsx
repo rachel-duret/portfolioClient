@@ -29,11 +29,16 @@ const Skill = props => {
                     )
                 }
                 {/*TODO to implement update one skill*/}
-                <div className="flex  justify-center">
-                    <button className="text-red-400 border-gray-500 ">
-                        <EditIcon/>
-                    </button>
-                </div>
+                {
+                    props.authUser === props.username && (
+                        <div className="flex  justify-center">
+                            <button className="text-red-400 border-gray-500 ">
+                                <EditIcon/>
+                            </button>
+                        </div>
+                    )
+                }
+
             </div>
         </div>
     );

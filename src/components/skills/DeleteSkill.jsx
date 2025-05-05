@@ -13,17 +13,19 @@ const DeleteSkill = props => {
     // Delete one skill
     const deleteOneSkill = async (id) => {
         // const fileRef = storage.ref().refFromURL(props.image)
-        const  desertRef = ref(storage, props.skill.image) //
-        console.log(props.skill.image)
-        await deleteObject(desertRef)
+
         try {
-            await axios.delete(`http://localhost:8080/skills/${id}`, {
+            await axios.delete(`https://portfolio-dev-v1-332485539213.herokuapp.com/skills/${id}`, {
                 headers: {
                     "Content-Type": "application/json",
                     "Accept": "application/json",
                     "Authorization": authHeader
                 }
             })
+
+            const  desertRef = ref(storage, props.skill.image) //
+            console.log(props.skill.image)
+            await deleteObject(desertRef)
 
             props.history.push(`/skills/${props.userId}`)
 

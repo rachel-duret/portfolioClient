@@ -6,6 +6,7 @@ import axios from "axios";
 import useAuthUser from "react-auth-kit/hooks/useAuthUser";
 import NewSkill from "../components/skills/NewSkill";
 import AddButton from "../components/buttons/AddButton";
+import Header from "../components/Header";
 
 const SkillsPage = props => {
     let params = useParams();
@@ -21,7 +22,7 @@ const SkillsPage = props => {
         const fetchUser = async () => {
             try {
 
-                const res = await axios.get(`http://localhost:8080/users/user/${params.username}`)
+                const res = await axios.get(`https://portfolio-dev-v1-332485539213.herokuapp.com/users/user/${params.username}`)
                 setUser(res.data);
                 setSkills(res.data.skills);
                 if (auth) {
@@ -41,7 +42,7 @@ const SkillsPage = props => {
 
     return (
         <>
-
+            <Header/>
             <div
                 className="flex relative flex-col text-center md:text-left cl:flex-row max-w-[2000px] xl:px-10 min-h-screen justify-center xl:space-y-0 mx-auto items-center ">
                 <h3 className="absolute top-24 uppercase tracking-[20px] text-gray-500 text-2xl ">

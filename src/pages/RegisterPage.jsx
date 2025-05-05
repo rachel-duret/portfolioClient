@@ -1,6 +1,5 @@
 import React, {useState} from 'react'
 import SubmitButton from "../components/buttons/SubmitButton";
-import CancelButton from "../components/buttons/CancelButton";
 import {Link, useNavigate} from "react-router-dom";
 import axios from "axios";
 import useSignIn from "react-auth-kit/hooks/useSignIn";
@@ -27,7 +26,7 @@ const RegisterPage = props => {
         }
 
         try {
-           const response= await axios.post(`http://localhost:8080/auth/register`, newUser)
+           const response= await axios.post(`https://portfolio-dev-v1-332485539213.herokuapp.com/auth/register`, newUser)
             const success=signIn({
                 auth:{
                     token: response.data,
@@ -51,7 +50,7 @@ const RegisterPage = props => {
 
     return (
         <section className="bg-gray-50 dark:bg-gray-900">
-            <div className="flex flex-col items-center justify-center mt-6 px-6 py-8 mx-auto md:h-screen lg:py-0">
+            <div className="flex flex-col items-center justify-center mt-6 px-6 py-8 mx-auto h-screen lg:py-0">
                 <div
                     className="w-0.5 bg-white rounded-lg shadow dark:border  md:mt-0 sm:max-w-md xl:p-0 mt-6dark:bg-gray-800 dark:border-gray-700">
                     <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
@@ -61,17 +60,17 @@ const RegisterPage = props => {
                         <form className="space-y-4 md:space-y-6" onSubmit={handleRegister}>
                             <div>
                                 <label htmlFor="username"
-                                       className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your
-                                    username</label>
+                                       className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                    Username</label>
                                 <input type="username" name="username" id="username"
                                        onChange={(event)=>setUsername(event.target.value)}
                                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                       placeholder="name@company.com" required/>
+                                       placeholder="username" required/>
                             </div>
                             <div>
                                 <label htmlFor="firstname"
-                                       className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your
-                                    firstname</label>
+                                       className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                    Firstname</label>
                                 <input type="text" name="firstname" id="firstname"
                                        onChange={(event)=>setFirstname(event.target.value)}
                                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -79,8 +78,7 @@ const RegisterPage = props => {
                             </div>
                             <div>
                                 <label htmlFor="lastname"
-                                       className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your
-                                    lastname</label>
+                                       className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Lastname</label>
                                 <input type="text" name="lastname" id="lastname"
                                        onChange={(event)=>setLastname(event.target.value)}
                                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -88,8 +86,7 @@ const RegisterPage = props => {
                             </div>
                             <div>
                                 <label htmlFor="email"
-                                       className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your
-                                    email</label>
+                                       className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
                                 <input type="email" name="email" id="email"
                                        onChange={(event)=>setEmail(event.target.value)}
                                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
